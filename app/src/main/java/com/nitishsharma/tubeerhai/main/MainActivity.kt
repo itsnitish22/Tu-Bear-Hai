@@ -1,7 +1,7 @@
 package com.nitishsharma.tubeerhai.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.nitishsharma.tubeerhai.R
 
 class MainActivity : AppCompatActivity() {

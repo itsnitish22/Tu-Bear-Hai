@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="300dp"
+    android:layout_margin="10dp"
+    android:backgroundTint="#FBF1E1"
+    app:cardCornerRadius="10dp">
+
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:orientation="horizontal">-->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|top"
+            android:padding="15dp"
+            android:src="@drawable/ic_whatsapp"
+            app:layout_constraintStart_toEndOf="@id/beerImage"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="174dp"
+            tools:layout_editor_absoluteY="0dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/beerImage"
+            android:layout_width="150dp"
+            android:layout_height="0dp"
+            android:layout_margin="10dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toTopOf="@+id/beerName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/beerName"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:background="#FF9800"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxEms="12"
+            android:maxLines="1"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/tagLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="Buzz" />
+
+        <TextView
+            android:id="@+id/tagLine"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:background="#FFD08B"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="1"
+            android:paddingStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text=" Real Bitter Experience!" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    </LinearLayout>-->
+
+</com.google.android.material.card.MaterialCardView>
