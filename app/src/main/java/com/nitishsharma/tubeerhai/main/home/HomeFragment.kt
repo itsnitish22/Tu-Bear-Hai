@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
 
             override fun onWhatsappClickListener(item: Beer) {
                 val textToShareOnWhatsapp =
-                    "Hey, checkout this new beer called ${item.name}. It has ${item.abv}% of alcohol in it and will make you dance like no one else."
+                    "Hey, checkout this new beer called ${item.name}. It has ${item.abv}% of alcohol in it and will make you dance like no one else.\nClick on the link to see the picture ${item.image_url}"
                 shareOnWhatsapp(textToShareOnWhatsapp)
             }
 
