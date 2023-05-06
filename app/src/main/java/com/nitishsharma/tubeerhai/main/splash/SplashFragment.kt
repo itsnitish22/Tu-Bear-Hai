@@ -22,6 +22,7 @@ class SplashFragment : Fragment() {
         navigateToHomeScreen()
     }
 
+    //navigate to home screen in 3 secs
     private fun navigateToHomeScreen() {
         Handler().postDelayed({
             findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())

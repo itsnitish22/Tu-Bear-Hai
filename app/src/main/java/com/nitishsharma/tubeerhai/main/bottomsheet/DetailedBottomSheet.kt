@@ -22,19 +22,21 @@ class DetailedBottomSheet : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? = BottomsheetDetailedBinding.inflate(inflater, container, false).also {
         binding = it
-        beer = arguments?.getParcelable("SELECTED_BEER")!!
+        beer =
+            arguments?.getParcelable("SELECTED_BEER")!! //getting the beer selected by user using parcelable
     }.root
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        (view?.parent as View).setBackgroundColor(Color.TRANSPARENT)
+        (view?.parent as View).setBackgroundColor(Color.TRANSPARENT) //background of bottom sheer as transparent
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews(beer)
+        initViews(beer) //initialize views
     }
 
+    //setting up data in the views
     private fun initViews(currentBeer: Beer) {
         binding.apply {
             com.bumptech.glide.Glide.with(requireActivity()).load(currentBeer.image_url)
@@ -75,6 +77,7 @@ class DetailedBottomSheet : BottomSheetDialogFragment() {
     companion object {
         const val ARGS = "SELECTED_BEER"
 
+        //getting instance of bottom sheet with the args as per user
         fun newInstance(beer: Beer): DetailedBottomSheet {
             val fragment = DetailedBottomSheet()
             val args = Bundle().apply {

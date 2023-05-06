@@ -4,15 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.nitishsharma.tubeerhai.paging.BeerRepository
-import kotlinx.coroutines.launch
 
 class HomeFragmentViewModel : ViewModel() {
-    val listOfBeers = BeerRepository().getBeers().cachedIn(viewModelScope)
-
-
-    fun getBeers() {
-        viewModelScope.launch {
-
-        }
-    }
+    val listOfBeers =
+        BeerRepository().getBeers().cachedIn(viewModelScope) //getting list of beers paged
 }

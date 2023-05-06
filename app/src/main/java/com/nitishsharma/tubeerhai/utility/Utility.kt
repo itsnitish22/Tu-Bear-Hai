@@ -6,7 +6,10 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 
+//extension functions here
 object Utility {
+
+    //share on whatsapp
     fun Context.shareOnWhatsapp(sharedMsg: String) {
         val whatsappIntent = Intent(Intent.ACTION_SEND)
         whatsappIntent.type = "text/plain"
@@ -23,6 +26,7 @@ object Utility {
         requireContext().shareOnWhatsapp(sharedMsg)
     }
 
+    //toast
     fun Context.toast(message: String) {
         Toast.makeText(
             this, message,
