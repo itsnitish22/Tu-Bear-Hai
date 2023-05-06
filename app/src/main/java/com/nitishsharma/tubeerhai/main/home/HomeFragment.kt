@@ -8,13 +8,19 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nitishsharma.tubeerhai.api.models.Beer
+import com.nitishsharma.tubeerhai.databinding.BottomsheetDetailedBinding
 import com.nitishsharma.tubeerhai.databinding.FragmentHomeBinding
+import com.nitishsharma.tubeerhai.main.bottomsheet.DetailedBottomSheet
 import com.nitishsharma.tubeerhai.paging.BeerPagingAdapter
+import com.nitishsharma.tubeerhai.utility.Utility.shareOnWhatsapp
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: BeerPagingAdapter
+    private lateinit var bottomDialogBinding: BottomsheetDetailedBinding
+    private lateinit var dialog: BottomSheetDialog
     private val viewModel: HomeFragmentViewModel by viewModels()
 
     override fun onCreateView(
@@ -22,19 +28,31 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? = FragmentHomeBinding.inflate(inflater, container, false).also {
         binding = it
+        dialog = BottomSheetDialog(requireContext())
         initViews()
     }.root
 
     private fun initViews() {
-        adapter = BeerPagingAdapter(object : BeerPagingAdapter.OnLongClickListener {
+        adapter = BeerPagingAdapter(object : BeerPagingAdapter.ClickListeners {
             override fun onItemLongClickListener(item: Beer) {
-                TODO("Not yet implemented")
+                openBottomSheetFragment(item)
+            }
+
+            override fun onWhatsappClickListener(item: Beer) {
+                val textToShareOnWhatsapp =
+                    "Hey, checkout this new beer called ${item.name}. It has ${item.abv}% of alcohol in it and will make you dance like no one else."
+                shareOnWhatsapp(textToShareOnWhatsapp)
             }
 
         })
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = adapter
+    }
+
+    private fun openBottomSheetFragment(item: Beer) {
+        val bottomSheetDialogFragment = DetailedBottomSheet.newInstance(item)
+        bottomSheetDialogFragment.show(childFragmentManager, "DETAILED_BOTTOM_SHEET")
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

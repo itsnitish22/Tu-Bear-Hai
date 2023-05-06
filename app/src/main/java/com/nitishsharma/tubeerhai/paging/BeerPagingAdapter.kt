@@ -14,17 +14,19 @@ import com.nitishsharma.tubeerhai.R
 import com.nitishsharma.tubeerhai.api.models.Beer
 
 class BeerPagingAdapter(
-    private val itemLongClickListener: OnLongClickListener
+    private val clickListeners: ClickListeners,
 ) : PagingDataAdapter<Beer, BeerPagingAdapter.ViewHolder>(COMPARATOR) {
 
-    interface OnLongClickListener {
+    interface ClickListeners {
         fun onItemLongClickListener(item: Beer)
+        fun onWhatsappClickListener(item: Beer)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val beerName = itemView.findViewById<TextView>(R.id.beerName)
         val beerTagline = itemView.findViewById<TextView>(R.id.tagLine)
         val beerImage = itemView.findViewById<ImageView>(R.id.beerImage)
+        val whatsappShare = itemView.findViewById<ImageView>(R.id.shareWhatsappIv)
     }
 
     companion object {
@@ -42,11 +44,21 @@ class BeerPagingAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null) {
-            Glide.with(holder.beerImage.context).load(item.image_url).diskCacheStrategy(
-                DiskCacheStrategy.DATA
-            ).into(holder.beerImage)
-            holder.beerName.text = item.name
-            holder.beerTagline.text = item.tagline
+            with(holder) {
+                Glide.with(beerImage.context).load(item.image_url).diskCacheStrategy(
+                    DiskCacheStrategy.DATA
+                ).into(beerImage)
+                beerName.text = item.name
+                beerTagline.text = item.tagline
+
+                whatsappShare.setOnClickListener {
+                    clickListeners.onWhatsappClickListener(item)
+                }
+                itemView.setOnLongClickListener {
+                    clickListeners.onItemLongClickListener(item)
+                    true
+                }
+            }
         }
     }
 
