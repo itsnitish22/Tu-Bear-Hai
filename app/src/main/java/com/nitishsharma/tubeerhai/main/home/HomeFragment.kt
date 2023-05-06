@@ -10,16 +10,15 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.nitishsharma.tubeerhai.api.models.Beer
-import com.nitishsharma.tubeerhai.databinding.BottomsheetDetailedBinding
 import com.nitishsharma.tubeerhai.databinding.FragmentHomeBinding
 import com.nitishsharma.tubeerhai.main.bottomsheet.DetailedBottomSheet
+import com.nitishsharma.tubeerhai.paging.BeerLoaderAdapter
 import com.nitishsharma.tubeerhai.paging.BeerPagingAdapter
 import com.nitishsharma.tubeerhai.utility.Utility.shareOnWhatsapp
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var adapter: BeerPagingAdapter
-    private lateinit var bottomDialogBinding: BottomsheetDetailedBinding
     private lateinit var dialog: BottomSheetDialog
     private val viewModel: HomeFragmentViewModel by viewModels()
 
@@ -47,7 +46,10 @@ class HomeFragment : Fragment() {
         })
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.setHasFixedSize(true)
-        binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = BeerLoaderAdapter(),
+            footer = BeerLoaderAdapter()
+        )
     }
 
     private fun openBottomSheetFragment(item: Beer) {
