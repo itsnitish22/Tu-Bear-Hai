@@ -69,19 +69,6 @@ class DetailedBottomSheet : BottomSheetDialogFragment() {
             descriptionBeerBrewingTips.text =
                 SpannableStringBuilder().bold { underline { append("Some Brewing Tips:") }.append("   ") }
                     .append(currentBeer.brewers_tips)
-            var malt = "\n"
-            var hops = "\n"
-            var yeast = currentBeer.ingredients.yeast
-            for (i in currentBeer.ingredients.malt) {
-                malt = "$malt • ${i.name} - ${i.amount.value} ${i.amount.unit} \n"
-            }
-            for (i in currentBeer.ingredients.hops) {
-                hops = "$hops • ${i.name} - ${i.amount.value} ${i.amount.unit} \n"
-            }
-            binding.descriptionBeerIngredients.text =
-                SpannableStringBuilder().bold { underline { append("Ingredients:\n") }.append("\nMalt:") }
-                    .append(malt).bold { append("\nHops:") }.append(hops)
-                    .bold { append("\nYeast:   ") }.append(yeast)
         }
     }
 
