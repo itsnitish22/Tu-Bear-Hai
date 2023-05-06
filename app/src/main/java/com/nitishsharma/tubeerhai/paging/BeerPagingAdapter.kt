@@ -12,9 +12,12 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.nitishsharma.tubeerhai.R
 import com.nitishsharma.tubeerhai.api.models.Beer
+import com.nitishsharma.tubeerhai.databinding.FragmentHomeBinding
 
 class BeerPagingAdapter(
     private val clickListeners: ClickListeners,
+    private val isLoading: Boolean,
+    private val fragement: FragmentHomeBinding
 ) : PagingDataAdapter<Beer, BeerPagingAdapter.ViewHolder>(COMPARATOR) {
 
     interface ClickListeners {
@@ -43,6 +46,8 @@ class BeerPagingAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
+        if (isLoading)
+            fragement.progressBar.visibility = View.GONE
         if (item != null) {
             with(holder) {
                 Glide.with(beerImage.context).load(item.image_url).diskCacheStrategy(

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -27,6 +28,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? = FragmentHomeBinding.inflate(inflater, container, false).also {
         binding = it
+        binding.progressBar.visibility = View.VISIBLE
         dialog = BottomSheetDialog(requireContext())
         initViews()
     }.root
@@ -43,7 +45,7 @@ class HomeFragment : Fragment() {
                 shareOnWhatsapp(textToShareOnWhatsapp)
             }
 
-        })
+        }, binding.progressBar.isVisible, binding)
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
         binding.recyclerView.setHasFixedSize(true)
         binding.recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
